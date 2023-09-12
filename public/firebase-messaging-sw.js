@@ -1,9 +1,8 @@
 
 
 
-import firebase from "firebase/compat/app";
-import "firebase/compat/messaging";
-
+import firebase from "firebase/app";
+import "firebase/messaging";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB0IRVwO9dklvHm_cMG-_Qq4e6u6eK8fmw",

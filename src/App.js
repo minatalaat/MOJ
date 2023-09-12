@@ -1,6 +1,6 @@
 import './App.css';
 import {useState} from 'react'
-import { fetchToken,onMessageListener } from './firebase';
+import { fetchToken, onMessageListener } from './firebase.js';
 import {Toast} from 'react-bootstrap'
 function requestPermission() {
   Notification.requestPermission().then((permission) => {
