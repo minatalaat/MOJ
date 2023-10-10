@@ -18,7 +18,10 @@ function App() {
   requestPermission()
   fetchToken(setIsTokenFound,setFcmToken)
 
+
+
   onMessageListener().then(payload =>{
+    console.log(payload);
     setNotification({
       title:payload.notification.title,
       body:payload.notification.body

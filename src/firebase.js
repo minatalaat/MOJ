@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage} from "firebase/messaging"
 
+
 var firebaseConfig ={  
     apiKey: "AIzaSyB0IRVwO9dklvHm_cMG-_Qq4e6u6eK8fmw",
     authDomain: "moj-notification-system.firebaseapp.com",
@@ -13,6 +14,11 @@ var firebaseConfig ={
 const firebaseapp = initializeApp(firebaseConfig)
 const messaging = getMessaging(firebaseapp)
 
+// onMessage(messaging, (payload) => {
+//   console.log('Message received. ', payload);
+//   // ...
+// });
+
 export const fetchToken  = (setTokenFound,setFcmToken) =>{
     return getToken(messaging, { vapidKey: 'BOCMLONttimv2aPbRAJ_NSeQVuDynTMHRy4N3ZxuuGc4gs-6MRelQDkywWTl9Gu38G8GgMu7hD_RSxz4JxBe9Ic' }).then((currentToken) => {
         if (currentToken) {
@@ -23,17 +29,17 @@ export const fetchToken  = (setTokenFound,setFcmToken) =>{
           // Show permission request UI
           setTokenFound(false)
           setFcmToken('')
-          // ...
+          
         }
       }).catch((err) => {
         console.log('An error occurred while retrieving token. ', err);
-        // ...
       });
 }
 
 export const onMessageListener = () =>
     new Promise((resolve)=>{
         onMessage(messaging,(payload)=>{
+          console.log('Front'+payload);
             resolve(payload)
         });
     });
