@@ -1,31 +1,39 @@
 
+// eslint-disable-next-line no-undef
+importScripts('https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js');
+// eslint-disable-next-line no-undef
+importScripts('https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js');
 
-/* eslint-disable */
-import { initializeApp } from "firebase/app";
-import { getMessaging ,onBackgroundMessage } from "firebase/messaging/sw";
-
-
-const firebaseApp = initializeApp({
-    apiKey: "AIzaSyB0IRVwO9dklvHm_cMG-_Qq4e6u6eK8fmw",
-    authDomain: "moj-notification-system.firebaseapp.com",
-    projectId: "moj-notification-system",
-    storageBucket: "moj-notification-system.appspot.com",
-    messagingSenderId: "64185784083",
-    appId: "1:64185784083:web:049f2332110eefb294ece6",
-    measurementId: "G-Q1Q6QJJPQ6"
+// Initialize the Firebase app in the service worker by passing in
+// your app's Firebase config object.
+// https://firebase.google.com/docs/web/setup#config-object
+// eslint-disable-next-line no-undef
+firebase.initializeApp({
+  apiKey: 'api-key',
+  authDomain: 'project-id.firebaseapp.com',
+  databaseURL: 'https://project-id.firebaseio.com',
+  projectId: 'project-id',
+  storageBucket: 'project-id.appspot.com',
+  messagingSenderId: 'sender-id',
+  appId: 'app-id',
+  measurementId: 'G-measurement-id',
 });
 
-const messaging = getMessaging(firebaseApp);
-
-onBackgroundMessage(messaging, (payload) => {
-    console.log('[firebase-messaging-sw.js] Received background message ', payload);
-    // Customize notification here
-    const notificationTitle = 'Background Message Title';
-    const notificationOptions = {
-      body: 'Background Message body.',
-      icon: '/firebase-logo.png'
-    };
+// Retrieve an instance of Firebase Messaging so that it can handle background
+// messages.
+// eslint-disable-next-line no-undef
+const messaging = firebase.messaging();
+messaging.onBackgroundMessage((payload) => {
   
-    self.registration.showNotification(notificationTitle,
-      notificationOptions);
-  });
+  // Customize notification here
+  const notificationTitle = payload.notification.title;
+  const notificationOptions = {
+    body:  payload.notification.body,
+    icon:  payload.notification.icon,
+    image:  payload.notification.image,
+    link:  payload.notification.link
+  };
+
+  // eslint-disable-next-line no-restricted-globals
+  self.registration.showNotification(notificationTitle, notificationOptions);
+});

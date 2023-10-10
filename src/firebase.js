@@ -36,6 +36,7 @@ export const fetchToken  = (setTokenFound,setFcmToken) =>{
       });
 }
 
+
 export const onMessageListener = () =>
     new Promise((resolve)=>{
         onMessage(messaging,(payload)=>{
@@ -43,3 +44,5 @@ export const onMessageListener = () =>
             resolve(payload)
         });
     });
+
+    
