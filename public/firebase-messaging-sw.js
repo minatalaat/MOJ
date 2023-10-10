@@ -24,16 +24,14 @@ firebase.initializeApp({
 // eslint-disable-next-line no-undef
 const messaging = firebase.messaging();
 messaging.onBackgroundMessage((payload) => {
-  
   // Customize notification here
   const notificationTitle = payload.notification.title;
   const notificationOptions = {
     body:  payload.notification.body,
     icon:  payload.notification.icon,
     image:  payload.notification.image,
-    link:  payload.notification.link
   };
-
+  window.open(payload.data.redirectUrl)
   // eslint-disable-next-line no-restricted-globals
   self.registration.showNotification(notificationTitle, notificationOptions);
 });

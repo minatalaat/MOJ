@@ -21,20 +21,23 @@ function App() {
 
 
   onMessageListener().then(payload =>{
-    console.log(payload);
     setNotification({
       title:payload.notification.title,
-      body:payload.notification.body
+      body:payload.notification.body,
+      link:payload.data.redirectUrl
     })
     setShow(true)
+   
+   
+
   }).catch(err => console.log('failed'))
   return (
     <div className="App">
-      <Toast onClose={()=>setShow(false)} show={show} delay={300}>
+      <Toast onClose={()=>setShow(false)} show={show} delay={300} >
         <Toast.Header>
           <strong className='mr-auto'>{notification.title}</strong>
         </Toast.Header>
-        <Toast.Body>
+        <Toast.Body  onClick={()=> window.open(notification.link)}>
           {notification.body}
         </Toast.Body>
       </Toast>

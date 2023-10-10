@@ -40,7 +40,6 @@ export const fetchToken  = (setTokenFound,setFcmToken) =>{
 export const onMessageListener = () =>
     new Promise((resolve)=>{
         onMessage(messaging,(payload)=>{
-          console.log('Front'+payload);
             resolve(payload)
         });
     });
